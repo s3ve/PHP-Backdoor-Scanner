@@ -1,6 +1,6 @@
 <?php
 /**
- * PHP代码查杀工具
+ * PHP代码查杀工具V1.0.2
  *
  * 输入需要扫描的目录，即可扫描该目录下的所有文件，查找是否有危险的函数、可疑的操作行为等
  *
@@ -116,13 +116,16 @@ scan_directory($scan_dir, $result);
                 display: inline-block;
                 vertical-align: baseline;
             }
-            
+        .table {
+            width: 100%;
+            max-width: 100%;
+        }
 
     </style>
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="mb-5"><strong>PHP Backdoor Scanner</strong> <font style="font-size:20px">V1.0.1</font></h1>
+    <h1 class="mb-5"><strong>PHP Backdoor Scanner</strong> <font style="font-size:20px">V1.0.2</font></h1>
     <form method="post">
         <div class="form-group">
             <strong>扫描目录：</strong>
@@ -133,27 +136,25 @@ scan_directory($scan_dir, $result);
             <?php endif; ?>
         </div>
     </form>
-    
-   
     <?php if (!empty($result)): ?>
-        <h2>扫描结果：</h2>
-        <table class="mb-12">
-            <thead>
-                <tr>
-                    <th class="mb-8">文件路径</th>
-                    <th class="mb-4">可疑函数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($result as $row): ?>
-                    <tr>
-                        <td><?php echo $row['file']; ?></td>
-                        <td><?php echo $row['function']; ?></td>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="row">
+                        <th class="col-lg-8">可疑文件路径</th>
+                        <th class="col-lg-4">可疑函数</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        
+                </thead>
+                <tbody>
+                    <?php foreach ($result as $row): ?>
+                        <tr class="row">
+                            <td class="col-lg-8"><?php echo $row['file']; ?></td>
+                            <td class="col-lg-4"><?php echo $row['function']; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     <?php endif; ?>
 </div>
     <footer>
